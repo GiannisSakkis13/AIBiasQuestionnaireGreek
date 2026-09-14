@@ -1,0 +1,336 @@
+:root {
+  --ink: #1c2a33;
+  --ink-soft: #4d5c66;
+  --paper: #f3f5f2;
+  --paper-raised: #ffffff;
+  --line: #d8ddd6;
+  --teal: #2f6f77;
+  --teal-dark: #204d53;
+  --amber: #c17f1e;
+  --amber-mild: #b89a72;
+  --amber-badge-bg: #f1ece2;
+  --radius: 3px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+
+.frame {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  min-height: 100vh;
+}
+
+/* ---------- masthead / gauge ---------- */
+
+.masthead {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 40px;
+}
+
+.eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.gauge {
+  display: flex;
+  gap: 6px;
+}
+
+.gauge .tick {
+  flex: 1;
+  height: 5px;
+  border-radius: 2px;
+  background: var(--line);
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.gauge .tick.done { background: var(--teal); }
+.gauge .tick.current { background: var(--amber); transform: scaleY(1.6); }
+
+/* ---------- screens ---------- */
+
+.screen { display: none; }
+.screen.active { display: block; animation: rise 0.35s ease; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1.25;
+  margin: 0 0 16px;
+}
+
+.lede {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+
+.fine-print {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  margin-top: 28px;
+}
+
+.btn-primary {
+  background: var(--teal-dark);
+  color: #fff;
+}
+
+.btn-primary:disabled {
+  background: var(--line);
+  color: var(--ink-soft);
+  cursor: not-allowed;
+}
+
+.btn-primary:not(:disabled):hover { background: var(--teal); }
+
+/* ---------- demographics form ---------- */
+
+.demographics-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 8px;
+  max-width: 46ch;
+}
+
+.demographics-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.demographics-field label {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.demographics-field select {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+}
+
+.demographics-field select:focus {
+  outline: none;
+  border-color: var(--teal-dark);
+}
+
+/* ---------- chat ---------- */
+
+.chat-log {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 40px;
+}
+
+.bubble {
+  max-width: 82%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  line-height: 1.5;
+  font-size: 15px;
+  word-break: break-word;
+}
+
+.bubble.bot {
+  align-self: flex-start;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-bottom-left-radius: 3px;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.bubble.user {
+  align-self: flex-end;
+  border-bottom-right-radius: 3px;
+  font-family: 'Inter', sans-serif;
+}
+
+.bubble.user.sent {
+  background: var(--teal-dark);
+  color: #fff;
+}
+
+/* the suggested answer, shown as a tappable chip on the user's side */
+button.bubble.user.suggested {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1.5px dashed var(--amber-mild);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, filter 0.15s ease;
+}
+
+button.bubble.user.suggested:hover {
+  border-color: var(--teal-dark);
+  background: rgba(255, 255, 255, 0.95);
+  filter: brightness(1.05);
+}
+
+.badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--amber-mild);
+  background: var(--amber-badge-bg);
+  padding: 2px 7px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.badge.neutral {
+  color: var(--ink-soft);
+  background: #e7eae5;
+}
+
+/* link-style button offered alongside the two AI variants, to keep the
+   participant's own typed answer instead of switching to either one */
+.ghost-link {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  padding: 4px 2px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.ghost-link:hover { color: var(--teal-dark); }
+
+/* wraps the two AI-generated variant chips + the keep-original link */
+.variants {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+/* the active turn: free-text composer for the participant's own typed answer */
+.turn-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.composer {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 82%;
+}
+
+.composer input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  background: #fff;
+  color: var(--ink);
+}
+
+.composer input:focus {
+  outline: none;
+  border-color: var(--teal-dark);
+}
+
+.composer button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.composer button:hover { background: var(--teal-dark); }
+
+/* typing indicator while the next question is being generated */
+.bubble.bot.typing {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 16px;
+}
+
+.bubble.bot.typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-soft);
+  animation: blink 1.2s infinite ease-in-out;
+}
+
+.bubble.bot.typing span:nth-child(2) { animation-delay: 0.2s; }
+.bubble.bot.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.2; }
+  40% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen.active, .bubble.bot.typing span { animation: none; }
+}

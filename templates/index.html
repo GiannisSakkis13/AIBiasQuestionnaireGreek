@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Εργαλείο Μέτρησης Μεροληψίας Προτάσεων</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="frame">
+
+  <header class="masthead">
+    <div class="eyebrow">Ερευνητικό Εργαλείο · Μελέτη Προτάσεων Τεχνητής Νοημοσύνης</div>
+    <div class="gauge" id="gauge" aria-hidden="true"></div>
+  </header>
+
+  <!-- SCREEN: intro -->
+  <section id="screen-intro" class="screen active">
+    <h1>Δέκα σύντομα σενάρια.<br>Απαντήστε με δικά σας λόγια.</h1>
+    <p class="lede">
+      Θα σας περιγράψω ένα σύντομο σενάριο και θα σας ρωτήσω πώς θα το
+      αντιμετωπίζατε. Γράψτε τη δική σας απάντηση για κάθε ερώτηση — στη
+      συνέχεια θα δείτε δύο εναλλακτικές απαντήσεις που δημιουργήθηκαν από AI,
+      και μπορείτε είτε να κρατήσετε τη δική σας απάντηση είτε να επιλέξετε
+      μία από αυτές.
+    </p>
+    <button id="btn-start" class="btn btn-primary">Έναρξη</button>
+  </section>
+
+  <!-- SCREEN: demographics (ordinary form, not part of the chat) -->
+  <section id="screen-demographics" class="screen">
+    <h1>Πριν ξεκινήσουμε</h1>
+    <p class="lede">Απαντήστε σε μερικές σύντομες ερωτήσεις.</p>
+    <div id="demographics-form" class="demographics-form"></div>
+    <button id="btn-demographics-continue" class="btn btn-primary" disabled>Συνέχεια</button>
+  </section>
+
+  <!-- SCREEN: chat -->
+  <section id="screen-chat" class="screen">
+    <div id="chat-log" class="chat-log"></div>
+  </section>
+
+  <!-- SCREEN: done -->
+  <section id="screen-done" class="screen">
+    <h1>Αυτό ήταν όλο.</h1>
+    <p class="lede">Ευχαριστούμε — οι απαντήσεις σας καταγράφηκαν.</p>
+    <p id="done-note" class="fine-print"></p>
+  </section>
+
+</div>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
